@@ -1,15 +1,24 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-import { Button, Tag, Table } from "antd";
+import { Button, Tag, Table, Modal } from "antd";
 
 class App extends React.Component {
   state = {
-    tableData: []
+    tableData: [],
+    modelVisible: false
   };
-  columns = [];
+  columns = [
+    { title: "序号" },
+    { title: "编号" },
+    { title: "任务描述" },
+    { title: "状态" },
+    { title: "完成时间" },
+    { title: "操作" }
+  ];
   render() {
-    let { tableData } = this.state;
+    let { tableData, modelVisible } = this.state;
+
     return (
       <div className="App">
         <h2 className="App-header">
@@ -17,7 +26,16 @@ class App extends React.Component {
             <img src={logo} className="App-logo" alt="logo" />
             <span> OA 任务管理系统</span>
           </span>
-          <Button size="small">新增任务</Button>
+          <Button
+            size="small"
+            onClick={() => {
+              this.setState({
+                modelVisible: true
+              });
+            }}
+          >
+            新增任务
+          </Button>
         </h2>
         <div className="App-body">
           <div className="tag-box">
@@ -31,6 +49,7 @@ class App extends React.Component {
             loading={false}
           />
         </div>
+        <Modal title="新增" open={modelVisible}></Modal>
       </div>
     );
   }
