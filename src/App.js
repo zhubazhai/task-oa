@@ -16,6 +16,12 @@ class App extends React.Component {
     { title: "完成时间" },
     { title: "操作" }
   ];
+  closeModal = () => {
+    this.setState({ modelVisible: false });
+  };
+  submit = () => {
+    this.setState({ modelVisible: false });
+  };
   render() {
     let { tableData, modelVisible } = this.state;
 
@@ -49,7 +55,13 @@ class App extends React.Component {
             loading={false}
           />
         </div>
-        <Modal title="新增" open={modelVisible}></Modal>
+        <Modal
+          title="新增"
+          open={modelVisible}
+          onCancel={this.closeModal}
+          okText="确认提交"
+          onOk={this.submit}
+        />
       </div>
     );
   }
